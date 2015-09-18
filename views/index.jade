@@ -7,7 +7,7 @@ block content
         .jumbotron
             .container
                 p Click the "Test" button to send an Ajax request to /api/test. If you are authenticated, the data will be displayed
-                .btn-group
+                .form-group
                     button#test.btn.btn-primary(type="button") Test
                     button#logout.btn.btn-primary(type="button") Logout
 
@@ -30,4 +30,44 @@ block content
                     a(href='/register')
                       button.btn.btn-default(type="button") Register
 
+                .form-group
+                    label.control-label.col-sm-2(for="remember") Check to Remember Me
+                    .col-sm-10
+                    input(type="checkbox", name="remember", checked=(false))
+
+
                 p#error.error
+    .well
+
+        form.form-horizontal#network(role='form' method="put")
+            legend
+                h1 Networking Events
+                .form-group
+                    label.control-label.col-sm-2(for="title") Title:
+                    .col-sm-10
+                        input.form-control(type='text' name="title" id="title" placeholder='Enter Title of Event' require="true")
+                .form-group
+                    label.control-label.col-sm-2(for="description") Description:
+                    .col-sm-10
+                        input.form-control(type='text' name="description" id="description" placeholder='Enter Description of Event')
+                .form-group
+                    label.control-label.col-sm-2(for="location") Location:
+                    .col-sm-10
+                        input.form-control(type='text' name="location" id="location" placeholder='Enter Location')
+                .form-group
+                    label.control-label.col-sm-2(for="date") Date:
+                    .col-sm-10
+                        input.form-control(type='date' name="date" id="date" placeholder='Enter Date')
+                .form-group
+                    label.control-label.col-sm-2(for="time") Time:
+                    .col-sm-10
+                        input.form-control(type='dateTime' name="time" id="time" placeholder='Time')
+
+                .form-group
+                    button.btn.btn-primary(type='submit') Create
+
+                    a(href='/')
+                      button.btn.btn-default(type="button") Cancel
+
+                p#error.error
+

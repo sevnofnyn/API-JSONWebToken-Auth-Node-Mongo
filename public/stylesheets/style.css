@@ -14,3 +14,10 @@ a {
 .error{
     color: red;
 }
+
+.btn-primary{
+    margin-right: 10px;
+}
+.btn-default{
+    margin-right: 10px;
+}

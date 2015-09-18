@@ -1,6 +1,7 @@
 var $loginForm;
 var $testDiv;
 var $registerForm;
+var $networkForm;
 var $user;
 var $error;
 var $content;
@@ -11,6 +12,7 @@ $(document).ready(function () {
     $loginForm = $('#login');
     $testDiv = $('#test');
     $registerForm = $('#register');
+    $networkForm = $('#network');
     $error = $('#error');
     $content = $('#content');
     $logout = $('#logout');
@@ -134,6 +136,27 @@ function bindEvents() {
         }).always(function () {
             console.log("complete");
         });
+    });
+
+
+    $networkForm.on('submit', function(e){
+        e.preventDefault();
+
+        var data = $(this).serializeArray();
+
+        $.ajax('/api/network', {
+            type: 'put',
+            data: data,
+            success: function(data){
+                $.ajax('/api/network', {
+                    type: 'get'
+
+                }).done(function (data, textStatus, jqXHR) {
+                    res.render
+                })
+            }
+        });
+
     });
 
     $logout.on('click', function () {

@@ -13,7 +13,8 @@ var UserSchema = new mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     username: {type: String, required: true, index: {unique: true}},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    networkingEvents: {type: Array}
 });
 
 /**
@@ -78,12 +79,18 @@ UserSchema.statics.getAuthenticated = function (user, callback) {
 
                 // check if the password was a match
                 if (isMatch) {
+                    var user = {
+                        username: doc.username,
+                        id: doc.id,
+                        firstName: doc.firstName,
+                        lastName: doc.lastName
+                    };
 
                     // return the jwt
-                    var token = jsonwebtoken.sign(doc, 'supersecret', {
-                        expiresInMinutes: 1440 // expires in 24 hours
+                    var token = jsonwebtoken.sign(user, 'supersecret', {
+                        expiresInMinutes: 2880 // expires in 48 hours
                     });
-                    return callback(null, token, doc);
+                    return callback(null, token, user);
                 }
                 else {
                     return callback(new Error('Invalid username or password.'), null);
@@ -118,7 +125,8 @@ UserSchema.statics.Create = function (user, callback) {
                 password: user.password,
                 username: user.username,
                 firstName: user.firstName,
-                lastName: user.lastName
+                lastName: user.lastName,
+                networkingEvents: []
             });
 
             // save the user
